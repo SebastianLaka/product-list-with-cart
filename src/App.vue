@@ -4,5 +4,6 @@
 <template>
 </template>
 
-<style scoped >
+<style lang="scss">
+@use './assets/sass/reset.scss' as *;
 </style>
