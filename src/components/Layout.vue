@@ -6,4 +6,8 @@ import ProductList from './product-list/ProductList.vue'
     <ProductList /> 
   </main>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.main-layout{
+  padding: 1em .25em;
+}
+</style>
