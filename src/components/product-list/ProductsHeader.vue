@@ -14,7 +14,8 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@media (min-width: 375px){
+@use '../../assets/sass/breakpoints.scss' as *;
+@media (min-width: $mobile-view){
   .product-header{
     position: fixed;
     left: 0;

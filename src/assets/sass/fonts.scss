@@ -1,5 +1,11 @@
+@use 'sass:map';
 $main-size: 1rem;
-$font-400: 400;
-$font-600: 600;
-$font-700: 700;
+$font-weights: (
+'font-400': 400,
+'font-600': 600,
+'font-700': 700,
+);
+@function changeWeight($weight){
+    @return map.get($font-weights, $weight);
+}
 $main-font: "Red Hat Text", sans-serif;

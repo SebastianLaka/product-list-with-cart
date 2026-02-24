@@ -10,10 +10,13 @@ import ProductsHeader from './ProductsHeader.vue'
 </template>
 
 <style lang="scss" scoped>
-@media (min-width: 375px){
+@use '../../assets/sass/breakpoints.scss' as *;
+@use '../../assets/sass/fonts.scss' as *;
+@media (min-width: $mobile-view){
 .product-header{
   &__category{
-    font-size: 2.5rem;
+    font-size: 3rem;
+    font-weight: changeWeight('font-700');
   }
 }
 }
