@@ -22,6 +22,7 @@ onMounted(() => {
     right: 0;
     top: 0;
     padding: 1em .25em;
+    z-index: 100;
   }
 }
 </style>
