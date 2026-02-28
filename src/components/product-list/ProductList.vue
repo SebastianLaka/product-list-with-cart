@@ -3,20 +3,23 @@ import ProductsHeader from './ProductsHeader.vue'
 import ProductItem from './ProductItem.vue'
 import { useProductsStore } from '@/stores/products'
 const storeProductData = useProductsStore()
-
 </script>
 
 <template>
   <ProductsHeader v-slot="{ productsHeader }">
     <h1 class="product-header__category">{{ productsHeader }}</h1>
   </ProductsHeader>
-  <ProductItem v-for="product in storeProductData.productDataCopy" 
-  :key="product.name" 
-  :image="product.image">
+  <ProductItem
+    v-for="product in storeProductData.productDataCopy"
+    :key="product.name"
+    :image="product.image"
+  >
     <template #product-info>
-      <p class="product-category"></p>
-      <h2 class="product-name"></h2>
-      <p class="product-price"></p>
+      <div class="product-info">
+        <p class="product-info__category">{{ product.category }}</p>
+        <h2 class="product-info__name">{{ product.name }}</h2>
+        <p class="product-info__price">${{ product.price.toFixed(2) }}</p>
+      </div>
     </template>
   </ProductItem>
 </template>
@@ -24,10 +27,25 @@ const storeProductData = useProductsStore()
 <style lang="scss" scoped>
 @use '../../assets/sass/breakpoints.scss' as *;
 @use '../../assets/sass/fonts.scss' as *;
+@use '../../assets/sass/colors.scss' as *;
 @media (min-width: $mobile-view) {
   .product-header {
     &__category {
       font-size: 3rem;
+      font-weight: changeWeight('font-700');
+    }
+  }
+  .product-info{
+    &__category{
+      color: getColor('Rose-500');
+      font-weight: changeWeight('font-400');
+    }
+    &__name{
+      color: getColor('Rose-900');
+      font-weight: changeWeight('font-600');
+    }
+    &__price{
+      color: getColor('Red');
       font-weight: changeWeight('font-700');
     }
   }
