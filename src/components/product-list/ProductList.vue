@@ -3,7 +3,6 @@ import ProductsHeader from './ProductsHeader.vue'
 import ProductItem from './ProductItem.vue'
 import { useProductsStore } from '@/stores/products'
 const storeProductData = useProductsStore()
-
 </script>
 
 <template>
@@ -63,14 +62,20 @@ const storeProductData = useProductsStore()
         font-size: 1.2rem;
       }
     }
-    
   }
 }
-@media (min-width: $desktop-small){
-  .products-container{
+@media (min-width: $desktop-small) {
+  .products-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2em;
+  }
+}
+@media (min-width: 1200px) {
+  .products-container {
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>

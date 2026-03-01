@@ -21,7 +21,7 @@ const getImageUrl = (path) => {
         <source :srcset="getImageUrl(image.tablet)" media="(min-width: 768px)" />
         <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop" />
       </picture>
-      <CartButton :icon="addCartIcon" class="cart-button"><p>Add to Cart</p></CartButton>
+      <CartButton :icon="addCartIcon" class="cart-button"><p class="cart-button__content">Add to Cart</p></CartButton>
     </div>
     <slot name="product-info" />
   </div>
@@ -29,6 +29,7 @@ const getImageUrl = (path) => {
 
 <style lang="scss" scoped>
 @use '../../assets/sass/colors.scss' as *;
+@use "../../assets/sass/fonts.scss" as *;
 @use '../../assets/sass/breakpoints.scss' as *;
 @media (min-width: 375px) {
   .products-box {
@@ -59,7 +60,15 @@ const getImageUrl = (path) => {
 }
 @media (min-width: $desktop-small){
   .products-box{
-    padding-top: 2em;
+    padding-top: 3em;
+    .product-image-area{
+      .cart-button{
+        padding: .5em .5em;
+        left: 15%;
+        right: 15%;
+        &__content{font-size: .875rem;}
+      }
+    }
   }
 }
 </style>
