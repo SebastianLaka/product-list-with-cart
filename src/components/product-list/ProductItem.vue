@@ -1,5 +1,5 @@
 <script setup>
-import CartButton from './cartButton.vue'
+import CartButton from './CartButton.vue'
 import addCartIcon from '../icons/icon-add-to-cart.svg'
 const props = defineProps({
   image: {
@@ -16,13 +16,17 @@ const getImageUrl = (path) => {
 <template>
   <div class="product-box">
     <div class="product-image-area">
-      <img class="product-image" :src="getImageUrl(image.mobile)" :alt="props.image.desktop" />
+      <picture>
+        <source :srcset="getImageUrl(image.desktop)" media="(min-width: 992px)" />
+        <source :srcset="getImageUrl(image.tablet)" media="(min-width: 768px)" />
+        <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop" />
+      </picture>
       <CartButton :icon="addCartIcon" class="cart-button"><p>Add to Cart</p></CartButton>
     </div>
-
     <slot name="product-info" />
   </div>
 </template>
+
 <style lang="scss" scoped>
 @use '../../assets/sass/colors.scss' as *;
 @media (min-width: 375px) {

@@ -3,6 +3,7 @@ import ProductsHeader from './ProductsHeader.vue'
 import ProductItem from './ProductItem.vue'
 import { useProductsStore } from '@/stores/products'
 const storeProductData = useProductsStore()
+
 </script>
 
 <template>
