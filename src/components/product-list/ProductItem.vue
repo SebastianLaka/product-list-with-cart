@@ -14,7 +14,7 @@ const getImageUrl = (path) => {
 </script>
 
 <template>
-  <div class="product-box">
+  <div class="products-box">
     <div class="product-image-area">
       <picture>
         <source :srcset="getImageUrl(image.desktop)" media="(min-width: 992px)" />
@@ -29,8 +29,9 @@ const getImageUrl = (path) => {
 
 <style lang="scss" scoped>
 @use '../../assets/sass/colors.scss' as *;
+@use '../../assets/sass/breakpoints.scss' as *;
 @media (min-width: 375px) {
-  .product-box {
+  .products-box {
     padding-top: 4em;
     .product-image-area {
       position: relative;
@@ -54,6 +55,11 @@ const getImageUrl = (path) => {
         border: 0.1em solid getColor('Rose-900');
       }
     }
+  }
+}
+@media (min-width: $desktop-small){
+  .products-box{
+    padding-top: 2em;
   }
 }
 </style>

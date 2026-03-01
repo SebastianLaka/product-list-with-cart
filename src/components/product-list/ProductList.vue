@@ -15,6 +15,7 @@ const storeProductData = useProductsStore()
       v-for="product in storeProductData.productDataCopy"
       :key="product.name"
       :image="product.image"
+      :class="`article-item-${product.category}`"
     >
       <template #product-info>
         <div class="product-info">
@@ -63,6 +64,13 @@ const storeProductData = useProductsStore()
       }
     }
     
+  }
+}
+@media (min-width: $desktop-small){
+  .products-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2em;
   }
 }
 </style>
