@@ -31,11 +31,11 @@ const storeProductData = useProductsStore()
 @use '../../assets/sass/breakpoints.scss' as *;
 @use '../../assets/sass/fonts.scss' as *;
 @use '../../assets/sass/colors.scss' as *;
+@use '../../assets/sass/mixins.scss' as *;
 @media (min-width: $mobile-view) {
   .products-container {
-    display: flex;
-    flex-direction: column;
-    gap: 3em 0;
+    @include flex-layout($flex-direction: column);
+    @include set-gap($row-gap: 3em);
     .product-header {
       &__category {
         font-size: 3rem;
@@ -43,9 +43,8 @@ const storeProductData = useProductsStore()
       }
     }
     .product-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5em 0;
+      @include flex-layout($flex-direction: column);
+      @include set-gap($row-gap: 0.5em);
       padding-top: 3em;
       &__category {
         color: getColor('Rose-500');
@@ -66,16 +65,13 @@ const storeProductData = useProductsStore()
 }
 @media (min-width: $desktop-small) {
   .products-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2em;
+    @include grid-layout($columns: 3);
+    @include set-gap($row-gap: 2em, $column-gap: 2.25em);
   }
 }
 @media (min-width: 1200px) {
   .products-container {
-    grid-column: 1/3;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    @include grid-child(1,3)
   }
 }
 </style>
