@@ -18,4 +18,8 @@ const props = defineProps({
     width: 2em;
     height: 2em;
 }
+.button-icon{
+  width: 1.25em;
+  height: 1.25em;
+}
 </style>

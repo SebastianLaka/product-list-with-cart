@@ -31,18 +31,14 @@ const getImageUrl = (path) => {
 @use '../../assets/sass/colors.scss' as *;
 @use "../../assets/sass/fonts.scss" as *;
 @use '../../assets/sass/breakpoints.scss' as *;
+@use "../../assets/sass/mixins.scss" as *;
 @media (min-width: 375px) {
   .products-box {
     padding-top: 4em;
     .product-image-area {
       position: relative;
-      .product-image {
-        object-fit: cover;
-      }
       .cart-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex-layout($justify-content: center, $align-items: center);
         gap: 0 0.5em;
         position: absolute;
         bottom: -1.5em;
@@ -66,7 +62,10 @@ const getImageUrl = (path) => {
         padding: .5em .5em;
         left: 15%;
         right: 15%;
-        &__content{font-size: .875rem;}
+        bottom: -1.2em;
+        &__content{
+          font-size: .875rem;
+        }
       }
     }
   }
