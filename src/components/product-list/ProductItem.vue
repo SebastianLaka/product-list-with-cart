@@ -36,12 +36,10 @@ const getImageUrl = (path) => {
   .products-box {
     padding-top: 4em;
     .product-image-area {
-    
       @include position-element($position: relative);
       .cart-button {
         @include flex-layout($justify-content: center, $align-items: center);
-        gap: 0 0.5em;
-     
+        @include set-gap($column-gap: .5em);
         @include position-element($position: absolute, $bottom: -1.5em, $left: 25%, $right: 25%);
         max-width: 225px;
         margin: 0 auto;
@@ -59,9 +57,7 @@ const getImageUrl = (path) => {
     .product-image-area{
       .cart-button{
         padding: .5em .5em;
-        left: 15%;
-        right: 15%;
-        bottom: -1.2em;
+        @include position-element($bottom: -1.2em, $left: 15%, $right: 15%);
         &__content{
           font-size: .875rem;
         }
