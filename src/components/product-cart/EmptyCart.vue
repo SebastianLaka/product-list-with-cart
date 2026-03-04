@@ -1,5 +1,7 @@
-<script setup></script>
+<script setup>
+</script>
 <template>
-    <slot name="empty-cart"/>
+    
+    <slot name="empty-cart-content" />
 </template>
 <style lang="scss" scoped></style>
