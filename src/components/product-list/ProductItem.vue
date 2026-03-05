@@ -1,6 +1,7 @@
 <script setup>
 import CartButton from './CartButton.vue'
 import addCartIcon from '../icons/icon-add-to-cart.svg'
+
 const props = defineProps({
   image: {
     type: Object,
@@ -21,7 +22,9 @@ const getImageUrl = (path) => {
         <source :srcset="getImageUrl(image.tablet)" media="(min-width: 768px)" />
         <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop" />
       </picture>
-      <CartButton :icon="addCartIcon" class="cart-button"><p class="cart-button__content">Add to Cart</p></CartButton>
+      <CartButton :icon="addCartIcon" class="cart-button"
+        ><p class="cart-button__content">Add to Cart</p></CartButton
+      >
     </div>
     <slot name="product-info" />
   </div>
@@ -29,9 +32,9 @@ const getImageUrl = (path) => {
 
 <style lang="scss" scoped>
 @use '../../assets/sass/colors.scss' as *;
-@use "../../assets/sass/fonts.scss" as *;
+@use '../../assets/sass/fonts.scss' as *;
 @use '../../assets/sass/breakpoints.scss' as *;
-@use "../../assets/sass/mixins.scss" as *;
+@use '../../assets/sass/mixins.scss' as *;
 @media (min-width: 375px) {
   .products-box {
     padding-top: 4em;
@@ -39,7 +42,7 @@ const getImageUrl = (path) => {
       @include position-element($position: relative);
       .cart-button {
         @include flex-layout($justify-content: center, $align-items: center);
-        @include set-gap($column-gap: .5em);
+        @include set-gap($column-gap: 0.5em);
         @include position-element($position: absolute, $bottom: -1.5em, $left: 25%, $right: 25%);
         max-width: 225px;
         margin: 0 auto;
@@ -51,15 +54,15 @@ const getImageUrl = (path) => {
     }
   }
 }
-@media (min-width: $desktop-small){
-  .products-box{
+@media (min-width: $desktop-small) {
+  .products-box {
     padding-top: 3em;
-    .product-image-area{
-      .cart-button{
-        padding: .5em .5em;
+    .product-image-area {
+      .cart-button {
+        padding: 0.5em 0.5em;
         @include position-element($bottom: -1.2em, $left: 15%, $right: 15%);
-        &__content{
-          font-size: .875rem;
+        &__content {
+          font-size: 0.875rem;
         }
       }
     }

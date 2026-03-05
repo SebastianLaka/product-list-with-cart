@@ -1,7 +1,8 @@
 <script setup>
+
 </script>
 <template>
-    <p>test</p>
+    <slot name="cart-items" />
 </template>
 <style lang="scss" scoped>
 </style>

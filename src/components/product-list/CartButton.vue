@@ -1,4 +1,6 @@
 <script setup>
+import { useCartStore } from '@/stores/cart'
+const cart = useCartStore()
 
 const props = defineProps({
   icon: {
@@ -8,7 +10,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <button>
+  <button @click="cart.updateCartAmount">
     <img :src="props.icon" class="button-icon"/>
     <slot></slot>
   </button>

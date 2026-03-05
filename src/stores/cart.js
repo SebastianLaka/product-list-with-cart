@@ -3,5 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', () => {
   const currentCartItem = ref(0)
-  return { currentCartItem }
+  const updateCartAmount = () => currentCartItem.value++
+  
+  return { currentCartItem, updateCartAmount }
 })

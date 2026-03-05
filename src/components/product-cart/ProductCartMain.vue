@@ -17,12 +17,22 @@ const emptyIllustrationData = ref({
       <template #empty-cart-content>
         <section class="empty-cart-content">
           <h1 class="empty-cart-content__cart-amount">Your Cart ({{ currentCartItem }})</h1>
-          <img class="empty-cart-content__image" :src="emptyIllustrationData.src" :alt="emptyIllustrationData.alt" />
+          <img
+            class="empty-cart-content__image"
+            :src="emptyIllustrationData.src"
+            :alt="emptyIllustrationData.alt"
+          />
           <p class="empty-cart-content__info">Your added items will appear here</p>
         </section>
       </template>
     </EmptyCart>
-    <CartItem v-else />
+    <CartItem v-else>
+      <template #cart-items>
+        <section class="cart-items-area">
+          <h1 class="cart-items-area__header">Your Cart ({{ currentCartItem }})</h1>
+        </section>
+      </template>
+    </CartItem>
   </section>
 </template>
 <style lang="scss" scoped>
@@ -31,21 +41,28 @@ const emptyIllustrationData = ref({
 @use '../../assets/sass/mixins.scss' as *;
 .cart-container {
   padding-top: 2.75em;
-  .empty-cart-content{
-    &__cart-amount{
+  .empty-cart-content {
+    &__cart-amount {
       color: getColor('Red');
       font-size: 1.5rem;
     }
-    &__image{
+    &__image {
       width: 50%;
       transform: translateX(50%);
       padding-top: 1em;
     }
-    &__info{
+    &__info {
       color: getColor('Rose-500');
       font-weight: changeWeight('font-600');
       text-align: center;
     }
   }
+  .cart-items-area{
+  &__header{
+    color: getColor('Red');
+      font-size: 1.5rem;
+  }
 }
+}
+
 </style>
