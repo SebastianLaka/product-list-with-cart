@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import CartButton from './CartButton.vue'
 import addCartIcon from '../icons/icon-add-to-cart.svg'
 import IncrementQuantity from '../icons/icon-increment-quantity.svg'
@@ -17,9 +18,9 @@ const getImageUrl = (path) => {
   return new URL(cleanPath, import.meta.url).href
 }
 
-const cartIcons = {
+const cartIcons = ref({
   buttonIcons: [addCartIcon, DecrementQuantity, IncrementQuantity],
-}
+})
 </script>
 
 <template>
@@ -28,8 +29,9 @@ const cartIcons = {
       <picture>
         <source :srcset="getImageUrl(image.desktop)" media="(min-width: 992px)" />
         <source :srcset="getImageUrl(image.tablet)" media="(min-width: 768px)" />
-        <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop" />
+        <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop"/>
       </picture>
+      <picture></picture>
       <CartButton
         class="cart-button"
         v-if="cart.currentCartItem === 0"

@@ -53,7 +53,7 @@ const storeProductData = useProductsStore()
       &__name {
         color: getColor('Rose-900');
         font-weight: changeWeight('font-600');
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
       &__price {
         color: getColor('Red');
