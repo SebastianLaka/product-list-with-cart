@@ -14,6 +14,7 @@ const storeProductData = useProductsStore()
       v-for="product in storeProductData.productDataCopy"
       :key="product.name"
       :image="product.image"
+      :product-data="product"
       :class="`article-item-${product.category}`"
     >
       <template #product-info>

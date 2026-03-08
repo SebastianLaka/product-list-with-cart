@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import EmptyCart from './EmptyCart.vue'
 import CartItem from './CartItem.vue'
+import RemoveItemIcon from '../icons/icon-remove-item.svg'
 import { useCartStore } from '@/stores/cart'
 const cart = useCartStore()
 const currentCartItem = computed(() => cart.currentCartItem)
@@ -26,13 +27,15 @@ const emptyIllustrationData = ref({
         </section>
       </template>
     </EmptyCart>
-    <CartItem v-else>
-      <template #cart-items>
-        <section class="cart-items-area">
-          <h1 class="cart-items-area__header">Your Cart ({{ currentCartItem }})</h1>
-        </section>
-      </template>
-    </CartItem>
+    <section v-else class="cart-items-area">
+      <h1 class="cart-items-area__header">Your Cart ({{ currentCartItem }})</h1>
+      <CartItem
+        v-for="cartItem in cart.cartItems"
+        :key="cartItem.name"
+        :item="cartItem"
+        :close-icon="RemoveItemIcon"
+      />
+    </section>
   </section>
 </template>
 <style lang="scss" scoped>
@@ -57,12 +60,53 @@ const emptyIllustrationData = ref({
       text-align: center;
     }
   }
-  .cart-items-area{
-  &__header{
-    color: getColor('Red');
+  .cart-items-area {
+    &__header {
+      color: getColor('Red');
       font-size: 1.5rem;
+    }
+    .cart-desserts {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2em;
+      .cart-item-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em 0;
+
+        .cart-item-pricing {
+          display: flex;
+          gap: 0 0.5em;
+          &__amount {
+            padding-right: 0.75em;
+            color: getColor('Red');
+            font-weight: changeWeight('font-600');
+          }
+          &__price,
+          &__amount-price {
+            color: getColor('Rose-500');
+          }
+          &__amount-price {
+            font-weight: changeWeight('font-600');
+          }
+        }
+      }
+      .remove-cart-item {
+        @include flex-layout($justify-content: center, $align-items: center);
+        border-radius: 50%;
+        border: 0.1em solid getColor('Rose-500');
+        padding: 0.5em;
+        height: 1.25rem;
+        width: 1.25rem;
+        cursor: pointer;
+        &__icon {
+          transform: translate(-0.01em, -0.02em);
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
   }
 }
-}
-
 </style>

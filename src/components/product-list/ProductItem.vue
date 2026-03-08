@@ -7,10 +7,11 @@ import DecrementQuantity from '../icons/icon-decrement-quantity.svg'
 import { useCartStore } from '@/stores/cart'
 const cart = useCartStore()
 const props = defineProps({
-  image: {
+  image: Object,
+  productData: {
     type: Object,
-    required: true,
-  },
+    required: true
+  }
 })
 
 const getImageUrl = (path) => {
@@ -44,11 +45,11 @@ const cartIcons = ref({
       </CartButton>
       <CartButton v-else class="cart-button activated-cart-button">
         <template #cart-content>
-          <button class="add-cart-item" @click="cart.decrementCartAmount">
+          <button class="remove-cart-item" @click="cart.decrementCartAmount">
             <img :src="cartIcons.buttonIcons[1]" alt="" class="remove-cart-icon" />
           </button>
           <p class="activated-cart-button__content">{{ cart.currentCartItem }}</p>
-          <button class="remove-cart-item" @click="cart.updateCartAmount">
+          <button class="add-cart-item" @click="cart.updateCartAmount">
             <img :src="cartIcons.buttonIcons[2]" alt="" class="add-cart-icon" />
           </button>
         </template>
