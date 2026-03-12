@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import CartButton from './CartButton.vue'
 import addCartIcon from '../icons/icon-add-to-cart.svg'
 import IncrementQuantity from '../icons/icon-increment-quantity.svg'
@@ -13,7 +13,6 @@ const props = defineProps({
     required: true
   }
 })
-
 const getImageUrl = (path) => {
   const cleanPath = path.replace('./', '../../')
   return new URL(cleanPath, import.meta.url).href
@@ -21,6 +20,10 @@ const getImageUrl = (path) => {
 
 const cartIcons = ref({
   buttonIcons: [addCartIcon, DecrementQuantity, IncrementQuantity],
+})
+
+const productInCart = computed(() => {
+  return cart.cartItems.find(item => item.name === props.productData.name)
 })
 </script>
 
@@ -32,11 +35,10 @@ const cartIcons = ref({
         <source :srcset="getImageUrl(image.tablet)" media="(min-width: 768px)" />
         <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop"/>
       </picture>
-      <picture></picture>
       <CartButton
         class="cart-button"
-        v-if="cart.currentCartItem === 0"
-        @click="cart.updateCartAmount"
+        v-if="!productInCart"
+       @click="cart.updateCartAmount(props.productData)"
       >
         <template #cart-content>
           <img :src="cartIcons.buttonIcons[0]" alt="" class="cart-icon" />
@@ -45,11 +47,11 @@ const cartIcons = ref({
       </CartButton>
       <CartButton v-else class="cart-button activated-cart-button">
         <template #cart-content>
-          <button class="remove-cart-item" @click="cart.decrementCartAmount">
+          <button class="remove-cart-item" @click="cart.decrementCartAmount(props.productData)">
             <img :src="cartIcons.buttonIcons[1]" alt="" class="remove-cart-icon" />
           </button>
-          <p class="activated-cart-button__content">{{ cart.currentCartItem }}</p>
-          <button class="add-cart-item" @click="cart.updateCartAmount">
+          <p class="activated-cart-button__content">{{ productInCart.quantity }}</p>
+          <button class="add-cart-item" @click="cart.updateCartAmount(props.productData)">
             <img :src="cartIcons.buttonIcons[2]" alt="" class="add-cart-icon" />
           </button>
         </template>

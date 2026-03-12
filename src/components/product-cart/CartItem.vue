@@ -25,12 +25,55 @@ const emit = defineEmits(['remove'])
       <img :src="closeIcon" alt="Remove item" class="remove-cart-item__icon" />
     </button>
   </div>
-  <div>
-
-    
-  </div>
 </template>
 
 <style lang="scss" scoped>
-/* Tutaj wrzuć style dla .cart-desserts, .cart-item-details itd. */
+@use '../../assets/sass/colors.scss' as *;
+@use '../../assets/sass/fonts.scss' as *;
+@use '../../assets/sass/mixins.scss' as *;
+@use '../../assets/sass/breakpoints.scss' as *;
+@media (min-width: $mobile-view) {
+  .cart-desserts {
+    @include flex-layout($justify-content: space-between, $align-items: center);
+    padding: 1em 0;
+    .cart-item-details {
+      @include flex-layout($flex-direction: column);
+      gap: 0.5em 0;
+      @include set-gap($row-gap: 1em);
+      &__product-name {
+        color: getColor('Rose-900');
+      }
+      .cart-item-pricing {
+        display: flex;
+        gap: 0 0.5em;
+        &__amount {
+          padding-right: 0.75em;
+          color: getColor('Red');
+          font-weight: changeWeight('font-600');
+        }
+        &__price,
+        &__amount-price {
+          color: getColor('Rose-500');
+        }
+        &__amount-price {
+          font-weight: changeWeight('font-600');
+        }
+      }
+    }
+    .remove-cart-item {
+      @include flex-layout($justify-content: center, $align-items: center);
+      border-radius: 50%;
+      border: 0.1em solid getColor('Rose-500');
+      padding: 0.5em;
+      height: 1.25rem;
+      width: 1.25rem;
+      cursor: pointer;
+      &__icon {
+        transform: translate(-0.01em, -0.02em);
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}
 </style>

@@ -14,6 +14,7 @@ import ProductCartMain from './product-cart/ProductCartMain.vue';
 .main-layout{
   position: relative;
   padding: 1em .25em;
+  min-height: 100svh;
 }
 @media(min-width: 1200px){
   .main-layout{

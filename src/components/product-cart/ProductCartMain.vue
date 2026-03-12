@@ -2,14 +2,21 @@
 import { ref, computed } from 'vue'
 import EmptyCart from './EmptyCart.vue'
 import CartItem from './CartItem.vue'
+import CartSummary from './CartSummary.vue'
+import IlluistrationEmptyCart from '../icons/illustration-empty-cart.svg'
 import RemoveItemIcon from '../icons/icon-remove-item.svg'
+import OrderIcon from '../icons/icon-carbon-neutral.svg'
 import { useCartStore } from '@/stores/cart'
+import CartButton from '../product-list/CartButton.vue'
 const cart = useCartStore()
 const currentCartItem = computed(() => cart.currentCartItem)
-import IlluistrationEmptyCart from '../icons/illustration-empty-cart.svg'
 const emptyIllustrationData = ref({
   src: IlluistrationEmptyCart,
   alt: 'Image with part of cake',
+})
+const noticeCartOrder = ref({
+  src: OrderIcon,
+  alt: 'This a carbon-neutral delivery',
 })
 </script>
 <template>
@@ -34,7 +41,28 @@ const emptyIllustrationData = ref({
         :key="cartItem.name"
         :item="cartItem"
         :close-icon="RemoveItemIcon"
+        :price="cartItem.price"
+        @remove="cart.removeItem(cartItem.name)"
       />
+      <CartSummary>
+        <div class="cart-summary-total">
+          <p class="cart-summary-total__content">Order Total</p>
+          <p class="cart-summary-total__price">${{ cart.sumUpCart.toFixed(2) }}</p>
+        </div>
+        <div class="cart-summary-notice">
+          <img
+            :src="noticeCartOrder.src"
+            :alt="noticeCartOrder.alt"
+            class="cart-summary-notice__icon"
+          />
+          <p class="cart-summary-notice__order-type">
+            This a <strong>carbon-neutral</strong> delivery
+          </p>
+        </div>
+        <CartButton class="confirm-cart-button">
+          <template #cart-content> Confirm Order </template>
+        </CartButton>
+      </CartSummary>
     </section>
   </section>
 </template>
@@ -42,71 +70,80 @@ const emptyIllustrationData = ref({
 @use '../../assets/sass/colors.scss' as *;
 @use '../../assets/sass/fonts.scss' as *;
 @use '../../assets/sass/mixins.scss' as *;
-.cart-container {
-  padding-top: 2.75em;
-  .empty-cart-content {
-    &__cart-amount {
-      color: getColor('Red');
-      font-size: 1.5rem;
+@use '../../assets/sass/breakpoints.scss' as *;
+@media (min-width: $mobile-view) {
+  .cart-container {
+    @include flex-layout($flex-direction: column, $align-items: center);
+    padding: 2.75em 1.5em 1.5em 1.5em;
+    .empty-cart-content {
+      &__cart-amount {
+        color: getColor('Red');
+        font-size: 1.5rem;
+        padding-bottom: 1em;
+      }
+      &__image {
+        width: 50%;
+        transform: translateX(50%);
+        padding-top: 1em;
+      }
+      &__info {
+        color: getColor('Rose-500');
+        font-weight: changeWeight('font-600');
+        text-align: center;
+      }
     }
-    &__image {
-      width: 50%;
-      transform: translateX(50%);
-      padding-top: 1em;
+    .cart-items-area {
+      &__header {
+        color: getColor('Red');
+        font-size: 1.5rem;
+        padding-bottom: 1em;
+      }
     }
-    &__info {
-      color: getColor('Rose-500');
+    .cart-summary-total {
+      @include flex-layout($flex-direction: row, $justify-content: space-between);
+      width: 100%;
+      &__content,
+      &__price {
+        color: getColor('Rose-900');
+      }
+      &__price {
+        font-weight: changeWeight('font-600');
+        font-size: 2rem;
+      }
+    }
+    .cart-summary-notice {
+      @include flex-layout(
+        $flex-direction: row,
+        $justify-content: space-between,
+        $align-items: center
+      );
+      @include set-gap($column-gap: 1em);
+      &__icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .confirm-cart-button {
+      padding: 0.75em 3em;
+      border-radius: 4em;
+      border: none;
+      border: 0.1em solid getColor('Red');
+      width: 100%;
+      background-color: getColor('Red');
       font-weight: changeWeight('font-600');
-      text-align: center;
+      color: getColor('Rose-50');
     }
   }
-  .cart-items-area {
-    &__header {
-      color: getColor('Red');
-      font-size: 1.5rem;
+}
+@media (min-width: 768px){
+  .cart-container{
+      padding: 2.75em 0 1.5em 1.5em;
+      .cart-summary-notice {
+      @include flex-layout(
+        $justify-content: center
+      );
     }
-    .cart-desserts {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 2em;
-      .cart-item-details {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5em 0;
+  }
 
-        .cart-item-pricing {
-          display: flex;
-          gap: 0 0.5em;
-          &__amount {
-            padding-right: 0.75em;
-            color: getColor('Red');
-            font-weight: changeWeight('font-600');
-          }
-          &__price,
-          &__amount-price {
-            color: getColor('Rose-500');
-          }
-          &__amount-price {
-            font-weight: changeWeight('font-600');
-          }
-        }
-      }
-      .remove-cart-item {
-        @include flex-layout($justify-content: center, $align-items: center);
-        border-radius: 50%;
-        border: 0.1em solid getColor('Rose-500');
-        padding: 0.5em;
-        height: 1.25rem;
-        width: 1.25rem;
-        cursor: pointer;
-        &__icon {
-          transform: translate(-0.01em, -0.02em);
-          width: 10px;
-          height: 10px;
-        }
-      }
-    }
-  }
 }
 </style>

@@ -16,14 +16,11 @@ onMounted(() => {
 <style lang="scss" scoped>
 @use '../../assets/sass/breakpoints.scss' as *;
 @use '../../assets/sass/wrapper.scss' as *;
+@use '../../assets/sass/mixins.scss' as *;
 @media (min-width: $mobile-view) {
   .product-header {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
     padding: 1em 0.25em;
-    z-index: 100;
+    @include position-element($position: fixed, $left: 0, $right: 0, $top: 0, $z-index: 100);
   }
 }
 </style>
