@@ -65,6 +65,7 @@ const noticeCartOrder = ref({
       </CartSummary>
     </section>
   </section>
+  
 </template>
 <style lang="scss" scoped>
 @use '../../assets/sass/colors.scss' as *;

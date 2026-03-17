@@ -1,11 +1,13 @@
 <script setup>
 import ProductList from './product-list/ProductList.vue'
 import ProductCartMain from './product-cart/ProductCartMain.vue';
+import SummaryPopup from './summary-popup/OrderSuccessModal.vue'
 </script>
 <template>
   <main class="main-layout wrapper">
     <ProductList /> 
     <ProductCartMain/>
+    <SummaryPopup />
   </main>
 </template>
 <style lang="scss" scoped>
