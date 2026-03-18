@@ -64,10 +64,15 @@ const storeProductData = useProductsStore()
     }
   }
 }
+@media (min-width: 768px) {
+  .products-container {
+    @include grid-layout($columns: 2);
+    @include set-gap($row-gap: 2em, $column-gap: 2.25em);
+  }
+}
 @media (min-width: $desktop-small) {
   .products-container {
     @include grid-layout($columns: 3);
-    @include set-gap($row-gap: 2em, $column-gap: 2.25em);
   }
 }
 @media (min-width: 1200px) {

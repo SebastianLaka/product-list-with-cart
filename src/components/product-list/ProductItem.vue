@@ -143,7 +143,7 @@ const productInCart = computed(() => {
       .activated-cart-button {
         .add-cart-item,
         .remove-cart-item {
-          margin: 0 4px;
+          margin: 0 .4em;
         }
       }
     }
