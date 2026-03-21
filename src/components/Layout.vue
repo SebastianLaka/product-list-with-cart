@@ -13,6 +13,7 @@ import SummaryPopup from './summary-popup/OrderSuccessModal.vue'
 <style lang="scss" scoped>
 @use '../assets/sass/breakpoints.scss' as *;
 @use "../assets/sass/wrapper.scss" as *;
+@use '../assets/sass/colors.scss' as *;
 .main-layout{
   position: relative;
   padding: 1em .25em;

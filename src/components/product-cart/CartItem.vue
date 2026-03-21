@@ -5,13 +5,20 @@ const props = defineProps({
     required: true,
   },
   closeIcon: String,
+  inOrder: Boolean
 })
+console.log(props);
+const getImageUrl = (path) => {
+  const cleanPath = path.replace('./', '../../')
+  return new URL(cleanPath, import.meta.url).href
+}
 const emit = defineEmits(['remove'])
 </script>
 
 <template>
   <div class="cart-desserts">
-    <div class="cart-item-details">
+    <img :src="getImageUrl(item.image.mobile)" alt="Dessert in summary modal when you completed your order." v-if="inOrder" class="cart-desserts__image">
+    <div class="cart-item-details cart-item-section">
       <h2 class="cart-item-details__product-name">{{ item.name }}</h2>
       <div class="cart-item-pricing">
         <p class="cart-item-pricing__amount">{{ item.quantity }}x</p>
@@ -21,7 +28,7 @@ const emit = defineEmits(['remove'])
         </p>
       </div>
     </div>
-    <button class="remove-cart-item" @click="emit('remove')">
+    <button class="remove-cart-item" @click="emit('remove')" v-if="!inOrder">
       <img :src="closeIcon" alt="Remove item" class="remove-cart-item__icon" />
     </button>
   </div>
@@ -35,8 +42,13 @@ const emit = defineEmits(['remove'])
 @media (min-width: $mobile-view) {
   .cart-desserts {
     @include flex-layout($justify-content: space-between, $align-items: center);
-    padding: 1em 0;
-    .cart-item-details {
+    @include set-gap($column-gap: 1em);
+  
+    &__image{
+      width:  75px;
+      height: 75px;
+    }
+    .cart-item-section {
       @include flex-layout($flex-direction: column);
       gap: 0.5em 0;
       @include set-gap($row-gap: 1em);

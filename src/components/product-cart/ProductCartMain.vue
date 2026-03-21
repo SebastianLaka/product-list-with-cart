@@ -65,7 +65,6 @@ const noticeCartOrder = ref({
       </CartSummary>
     </section>
   </section>
-  
 </template>
 <style lang="scss" scoped>
 @use '../../assets/sass/colors.scss' as *;
@@ -77,6 +76,10 @@ const noticeCartOrder = ref({
     @include flex-layout($flex-direction: column, $align-items: center);
     padding: 2.75em 1.5em 1.5em 1.5em;
     .empty-cart-content {
+      background-color: getColor('Rose-50');
+      border-radius: 1em;
+      width: 100%;
+      padding: 1em;
       &__cart-amount {
         color: getColor('Red');
         font-size: 1.5rem;
@@ -94,10 +97,15 @@ const noticeCartOrder = ref({
       }
     }
     .cart-items-area {
+      @include flex-layout($flex-direction: column);
+      @include set-gap($row-gap: 1.75em);
+      background-color: getColor('Rose-50');
+      border-radius: 1em;
+      width: 100%;
+      padding: 1.5em;
       &__header {
         color: getColor('Red');
         font-size: 1.5rem;
-        padding-bottom: 1em;
       }
     }
     .cart-summary-total {
@@ -136,6 +144,7 @@ const noticeCartOrder = ref({
     }
   }
 }
+
 @media (min-width: 768px){
   .cart-container{
       padding: 2.75em 0 1.5em 1.5em;
@@ -145,6 +154,5 @@ const noticeCartOrder = ref({
       );
     }
   }
-
 }
 </style>

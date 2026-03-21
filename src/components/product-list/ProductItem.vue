@@ -13,6 +13,7 @@ const props = defineProps({
     required: true
   }
 })
+
 const getImageUrl = (path) => {
   const cleanPath = path.replace('./', '../../')
   return new URL(cleanPath, import.meta.url).href
@@ -71,6 +72,10 @@ const productInCart = computed(() => {
     padding-top: 4em;
     .product-image-area {
       @include position-element($position: relative);
+      .product-image{
+        border-radius: 1em;
+      }
+      
       .cart-button {
         @include flex-layout($justify-content: center, $align-items: center);
         @include set-gap($column-gap: 0.5em);

@@ -2,11 +2,11 @@
 import SuccessModalContent from './SuccessModalContent.vue'
 import { ref } from 'vue'
 import SuccessIcon from '../icons/icon-order-confirmed.svg'
-
 const iconData = ref({
   src: SuccessIcon,
   alt: 'Success icon modal at top',
 })
+
 </script>
 <template>
   <section class="order-modal-popup">
@@ -27,9 +27,9 @@ const iconData = ref({
 @use '../../assets/sass/mixins.scss' as *;
 @use '../../assets/sass/breakpoints.scss' as *;
 .order-modal-popup {
-  min-height: 100svh;
+  min-height: 30svh;
   background-color: getColor('Black-shadow');
-  @include position-element($position: fixed, $left: 0, $right: 0, $bottom: 0, $z-index: 100);
+  @include position-element($position: fixed, $left: 0, $right: 0, $bottom: 0, $top: 0, $z-index: 100);
   @include flex-layout($justify-content: end, $flex-direction: column);
   .success-modal-content {
     &__icon {
@@ -47,7 +47,7 @@ const iconData = ref({
     }
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .order-modal-popup {
     @include flex-layout($justify-content: center, $align-items: center, $flex-direction: column);
   }

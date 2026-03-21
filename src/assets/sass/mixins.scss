@@ -1,4 +1,4 @@
-@mixin flex-layout($flex-direction: null, $justify-content: null, $align-items: null) {
+@mixin flex-layout($flex-direction: null, $justify-content: null, $align-items: null, $flex-wrap: null) {
   display: flex;
   @if $flex-direction {
     flex-direction: $flex-direction;
@@ -8,6 +8,9 @@
   }
   @if $align-items {
     align-items: $align-items;
+  }
+  @if $flex-wrap{
+    flex-wrap: $flex-wrap;
   }
 }
 @mixin grid-layout($columns: null) {

@@ -1,23 +1,28 @@
 <script setup>
 import CartButton from '../product-list/CartButton.vue'
-const props = defineProps({
-  type: Object,
-  required: true,
-})
+import CartItem from '../product-cart/CartItem.vue'
+import CartSummary from '../product-cart/CartSummary.vue'
+import { useCartStore } from '@/stores/cart'
+const cart = useCartStore()
 </script>
 <template>
   <div class="success-modal-content">
     <slot name="order-confirm" />
-    <div class="cart-summary">
-      <div class="cart-summary-details">
-        <h2 class="cart-item-details__product-name">{{ props.name }}</h2>
-        <div class="cart-item-pricing">
-          <p class="cart-item-pricing__amount">{{ props.quantity }}x</p>
-          <p class="cart-item-pricing__price">@${{ props.price }}</p>
-          <p class="cart-item-pricing__amount-price">${{ props.price * props.quantity }}</p>
-        </div>
-      </div>
+    <div class="modal-cart-items">
+      <CartItem
+        v-for="cartItem in cart.cartItems"
+        :key="cartItem.name"
+        :item="cartItem"
+        :price="cartItem.price"
+        :in-order="true"
+      />
     </div>
+    <CartSummary>
+      <div class="cart-summary-total">
+        <p class="cart-summary-total__content">Order Total</p>
+        <p class="cart-summary-total__price">${{ cart.sumUpCart.toFixed(2) }}</p>
+      </div>
+    </CartSummary>
     <CartButton class="cart-button">
       <template #cart-content>Start New Order</template>
     </CartButton>
@@ -31,12 +36,26 @@ const props = defineProps({
 .success-modal-content {
   @include flex-layout($flex-direction: column, $justify-content: center);
   background-color: getColor('Rose-50');
-  padding: 4em 2em 1em;
-  height: 85svh;
+  padding: 2em;
+  height: 90svh;
+  border-radius: 1em;
+  @include set-gap($row-gap: 2em);
+  .cart-summary-total {
+       @include flex-layout($justify-content: space-between);
+      &__price {
+        font-size: 1.75rem;
+      }
+    }
+  .modal-cart-items {
+    @include flex-layout($flex-direction: column, $align-items: start);
+    @include set-gap($row-gap: 0.5em);
+    overflow-y: scroll;
+  }
 }
 .cart-button {
   width: 100%;
-  padding: 1em;
+  padding: 0.75em;
+  margin-top: 0.5em;
   border-radius: 4em;
   border: 0.1em solid getColor('Rose-900');
   border: none;
@@ -44,13 +63,11 @@ const props = defineProps({
   color: getColor('Rose-50');
   font-weight: changeWeight('font-600');
 }
-@media (min-width: 1200px){
-  .success-modal-content{
-     @include flex-layout($align-items: center, $justify-content: space-between);
-     max-width: 600px;
-     height: 75svh;
-     border-radius: 1em;
+@media (min-width: 768px) {
+  .success-modal-content {
+    @include flex-layout($justify-content: space-evenly);
+    max-width: 500px;
+
   }
-  
 }
 </style>
