@@ -15,6 +15,7 @@ const cart = useCartStore()
         :item="cartItem"
         :price="cartItem.price"
         :in-order="true"
+        
       />
     </div>
     <CartSummary>
@@ -34,6 +35,7 @@ const cart = useCartStore()
 @use '../../assets/sass/mixins.scss' as *;
 @use '../../assets/sass/breakpoints.scss' as *;
 .success-modal-content {
+
   @include flex-layout($flex-direction: column, $justify-content: center);
   background-color: getColor('Rose-50');
   padding: 2em;
@@ -49,7 +51,7 @@ const cart = useCartStore()
   .modal-cart-items {
     @include flex-layout($flex-direction: column, $align-items: start);
     @include set-gap($row-gap: 0.5em);
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 }
 .cart-button {

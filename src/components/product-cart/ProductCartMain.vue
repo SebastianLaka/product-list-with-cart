@@ -6,8 +6,8 @@ import CartSummary from './CartSummary.vue'
 import IlluistrationEmptyCart from '../icons/illustration-empty-cart.svg'
 import RemoveItemIcon from '../icons/icon-remove-item.svg'
 import OrderIcon from '../icons/icon-carbon-neutral.svg'
-import { useCartStore } from '@/stores/cart'
 import CartButton from '../product-list/CartButton.vue'
+import { useCartStore } from '@/stores/cart'
 const cart = useCartStore()
 const currentCartItem = computed(() => cart.currentCartItem)
 const emptyIllustrationData = ref({
@@ -59,7 +59,7 @@ const noticeCartOrder = ref({
             This a <strong>carbon-neutral</strong> delivery
           </p>
         </div>
-        <CartButton class="confirm-cart-button">
+        <CartButton class="confirm-cart-button" @click="cart.showModal">
           <template #cart-content> Confirm Order </template>
         </CartButton>
       </CartSummary>

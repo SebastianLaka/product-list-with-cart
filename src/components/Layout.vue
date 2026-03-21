@@ -2,12 +2,14 @@
 import ProductList from './product-list/ProductList.vue'
 import ProductCartMain from './product-cart/ProductCartMain.vue';
 import SummaryPopup from './summary-popup/OrderSuccessModal.vue'
+import { useCartStore } from '@/stores/cart'
+const cart = useCartStore()
 </script>
 <template>
   <main class="main-layout wrapper">
     <ProductList /> 
     <ProductCartMain/>
-    <SummaryPopup />
+    <SummaryPopup v-if="cart.isClicked"/>
   </main>
 </template>
 <style lang="scss" scoped>

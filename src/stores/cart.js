@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', () => {
   const currentCartItem = ref(0)
+  const isClicked = ref(false)
   const cartItems = ref([])
   const updateCartAmount = (product) => {
     currentCartItem.value++;
@@ -32,6 +33,11 @@ export const useCartStore = defineStore('cart', () => {
   const sumUpCart = computed(() => {
    return cartItems.value.reduce((total, item) => total + (item.price * item.quantity), 0)
   })
+  const showModal = () => {
+    isClicked.value = true;
+    console.log('ok');
+  }
+
 
   return {
     currentCartItem,
@@ -39,6 +45,8 @@ export const useCartStore = defineStore('cart', () => {
     updateCartAmount,
     decrementCartAmount,
     removeItem,
-    sumUpCart
+    sumUpCart,
+    isClicked,
+    showModal
   }
 })
