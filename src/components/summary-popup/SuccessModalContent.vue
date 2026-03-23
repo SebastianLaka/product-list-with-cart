@@ -15,7 +15,6 @@ const cart = useCartStore()
         :item="cartItem"
         :price="cartItem.price"
         :in-order="true"
-        
       />
     </div>
     <CartSummary>
@@ -24,9 +23,14 @@ const cart = useCartStore()
         <p class="cart-summary-total__price">${{ cart.sumUpCart.toFixed(2) }}</p>
       </div>
     </CartSummary>
-    <CartButton class="cart-button">
-      <template #cart-content>Start New Order</template>
-    </CartButton>
+    <div class="modal-actions">
+      <CartButton class="cart-button" @click="cart.resetCart">
+        <template #cart-content>Start New Order</template>
+      </CartButton>
+      <CartButton class="cart-button" @click="cart.hideModal">
+        <template #cart-content>Back To Cart</template>
+      </CartButton>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -35,7 +39,6 @@ const cart = useCartStore()
 @use '../../assets/sass/mixins.scss' as *;
 @use '../../assets/sass/breakpoints.scss' as *;
 .success-modal-content {
-
   @include flex-layout($flex-direction: column, $justify-content: center);
   background-color: getColor('Rose-50');
   padding: 2em;
@@ -43,11 +46,18 @@ const cart = useCartStore()
   border-radius: 1em;
   @include set-gap($row-gap: 2em);
   .cart-summary-total {
-       @include flex-layout($justify-content: space-between);
-      &__price {
-        font-size: 1.75rem;
-      }
+    @include flex-layout($justify-content: space-between);
+    &__content{
+      @include set-element-typography('Rose-900', 'font-400', 1rem);
     }
+    &__price {
+      @include set-element-typography('Rose-900', 'font-700', 1.75rem);
+    }
+  }
+  .modal-actions{
+    @include flex-layout($flex-direction: column);
+    @include set-gap($row-gap: .75em);
+  }
   .modal-cart-items {
     @include flex-layout($flex-direction: column, $align-items: start);
     @include set-gap($row-gap: 0.5em);
@@ -62,14 +72,12 @@ const cart = useCartStore()
   border: 0.1em solid getColor('Rose-900');
   border: none;
   background-color: getColor('Red');
-  color: getColor('Rose-50');
-  font-weight: changeWeight('font-600');
+  @include set-element-typography('Rose-50', 'font-600', 1rem);
 }
-@media (min-width: 768px) {
+@media (min-width: $tablet-view) {
   .success-modal-content {
     @include flex-layout($justify-content: space-evenly);
-    max-width: 500px;
-
+    max-width: 31.25em;
   }
 }
 </style>

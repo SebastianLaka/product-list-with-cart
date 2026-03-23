@@ -43,25 +43,22 @@ const emit = defineEmits(['remove'])
   .cart-desserts {
     @include flex-layout($justify-content: space-between, $align-items: center);
     @include set-gap($column-gap: 1em);
-  
     &__image{
-      width:  75px;
-      height: 75px;
+      width:  4.688em;
+      height: 4.688em;
     }
     .cart-item-section {
       @include flex-layout($flex-direction: column);
-      gap: 0.5em 0;
       @include set-gap($row-gap: 1em);
       &__product-name {
         color: getColor('Rose-900');
       }
       .cart-item-pricing {
-        display: flex;
+        @include flex-layout();
         gap: 0 0.5em;
         &__amount {
           padding-right: 0.75em;
-          color: getColor('Red');
-          font-weight: changeWeight('font-600');
+          @include set-element-typography('Red', 'font-600', 1rem);
         }
         &__price,
         &__amount-price {
@@ -82,8 +79,8 @@ const emit = defineEmits(['remove'])
       cursor: pointer;
       &__icon {
         transform: translate(-0.01em, -0.02em);
-        width: 10px;
-        height: 10px;
+        width: 0.625em;
+        height: 0.625em;
       }
     }
   }

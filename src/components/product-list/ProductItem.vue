@@ -67,21 +67,19 @@ const productInCart = computed(() => {
 @use '../../assets/sass/fonts.scss' as *;
 @use '../../assets/sass/breakpoints.scss' as *;
 @use '../../assets/sass/mixins.scss' as *;
-@media (min-width: 375px) {
+@media (min-width: $mobile-view) {
   .products-box {
-    padding-top: 4em;
     .product-image-area {
       @include position-element($position: relative);
       .product-image{
         border-radius: 1em;
       }
-      
       .cart-button {
         @include flex-layout($justify-content: center, $align-items: center);
         @include set-gap($column-gap: 0.5em);
         @include position-element($position: absolute, $bottom: -1.25em, $left: 25%, $right: 25%);
-        max-width: 225px;
-        height: 50px;
+        max-width: 14.063em;
+        height: 3.125em;
         margin: 0 auto;
         padding: 0.5em 1em;
         border-radius: 4em;
@@ -108,12 +106,11 @@ const productInCart = computed(() => {
           outline: 0.1em solid getColor('Rose-50');
           padding: 0;
           background-color: transparent;
-          height: 1.25rem;
-          width: 1.25rem;
-          cursor: pointer;
+          height: 1.25em;
+          width: 1.25em;
           transition: all 0.3s ease;
           img {
-            width: 10px;
+            width: .75em;
             height: auto;
             filter: brightness(0) invert(1);
           }
@@ -132,7 +129,7 @@ const productInCart = computed(() => {
 }
 @media (min-width: $desktop-small) {
   .products-box {
-    padding-top: 3em;
+
     .product-image-area {
       .cart-button {
         padding: 0.5em 0.5em;

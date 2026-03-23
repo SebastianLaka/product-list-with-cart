@@ -35,7 +35,14 @@ export const useCartStore = defineStore('cart', () => {
   })
   const showModal = () => {
     isClicked.value = true;
-    console.log('ok');
+  }
+  const hideModal = () => {
+    isClicked.value = false;
+  }
+  const resetCart = () => {
+    currentCartItem.value = 0;
+    cartItems.value = [];
+    isClicked.value = false;
   }
 
 
@@ -47,6 +54,8 @@ export const useCartStore = defineStore('cart', () => {
     removeItem,
     sumUpCart,
     isClicked,
-    showModal
+    showModal,
+    hideModal,
+    resetCart
   }
 })

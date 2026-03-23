@@ -1,4 +1,12 @@
-@mixin flex-layout($flex-direction: null, $justify-content: null, $align-items: null, $flex-wrap: null) {
+@use './colors.scss' as *;
+@use './fonts.scss' as *;
+
+@mixin flex-layout(
+  $flex-direction: null,
+  $justify-content: null,
+  $align-items: null,
+  $flex-wrap: null
+) {
   display: flex;
   @if $flex-direction {
     flex-direction: $flex-direction;
@@ -9,7 +17,7 @@
   @if $align-items {
     align-items: $align-items;
   }
-  @if $flex-wrap{
+  @if $flex-wrap {
     flex-wrap: $flex-wrap;
   }
 }
@@ -39,10 +47,10 @@
   @if $right {
     right: $right;
   }
-  @if $bottom{
+  @if $bottom {
     bottom: $bottom;
   }
-  @if $left{
+  @if $left {
     left: $left;
   }
   @if $z-index {
@@ -50,3 +58,14 @@
   }
 }
 
+@mixin set-element-typography($color, $font-weight, $font-size) {
+  @if $color {
+    color: getColor($color);
+  }
+  @if $font-weight {
+    font-weight: changeWeight($font-weight);
+  }
+  @if $font-size {
+    font-size: $font-size;
+  }
+}

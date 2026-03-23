@@ -47,7 +47,7 @@ const iconData = ref({
     }
   }
 }
-@media (min-width: 768px) {
+@media (min-width: $tablet-view) {
   .order-modal-popup {
     @include flex-layout($justify-content: center, $align-items: center, $flex-direction: column);
   }

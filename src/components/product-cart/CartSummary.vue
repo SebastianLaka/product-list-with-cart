@@ -12,10 +12,9 @@
     @include set-gap($row-gap: 2.5em);
   }
 }
-
-@media (min-width: 1200px){
-    .cart-summary{
-        width: 100%;
-    }
+@media (min-width: $desktop-wide) {
+  .cart-summary {
+    width: 100%;
+  }
 }
 </style>

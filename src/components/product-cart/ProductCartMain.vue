@@ -74,15 +74,14 @@ const noticeCartOrder = ref({
 @media (min-width: $mobile-view) {
   .cart-container {
     @include flex-layout($flex-direction: column, $align-items: center);
-    padding: 2.75em 1.5em 1.5em 1.5em;
+    padding-bottom: 1em;
     .empty-cart-content {
       background-color: getColor('Rose-50');
       border-radius: 1em;
       width: 100%;
       padding: 1em;
       &__cart-amount {
-        color: getColor('Red');
-        font-size: 1.5rem;
+        @include set-element-typography('Red', 'font-700', 1.5rem);
         padding-bottom: 1em;
       }
       &__image {
@@ -91,8 +90,7 @@ const noticeCartOrder = ref({
         padding-top: 1em;
       }
       &__info {
-        color: getColor('Rose-500');
-        font-weight: changeWeight('font-600');
+        @include set-element-typography('Rose-500', 'font-600', 1rem);
         text-align: center;
       }
     }
@@ -104,20 +102,14 @@ const noticeCartOrder = ref({
       width: 100%;
       padding: 1.5em;
       &__header {
-        color: getColor('Red');
-        font-size: 1.5rem;
+        @include set-element-typography('Red', 'font-700', 1.5rem);
       }
     }
     .cart-summary-total {
       @include flex-layout($flex-direction: row, $justify-content: space-between);
       width: 100%;
-      &__content,
       &__price {
-        color: getColor('Rose-900');
-      }
-      &__price {
-        font-weight: changeWeight('font-600');
-        font-size: 2rem;
+        @include set-element-typography('Rose-900', 'font-600', 2rem);
       }
     }
     .cart-summary-notice {
@@ -128,8 +120,8 @@ const noticeCartOrder = ref({
       );
       @include set-gap($column-gap: 1em);
       &__icon {
-        width: 32px;
-        height: 32px;
+        width: 3.2em;
+        height: 3.2em;
       }
     }
     .confirm-cart-button {
@@ -139,19 +131,16 @@ const noticeCartOrder = ref({
       border: 0.1em solid getColor('Red');
       width: 100%;
       background-color: getColor('Red');
-      font-weight: changeWeight('font-600');
-      color: getColor('Rose-50');
+      @include set-element-typography('Rose-50', 'font-600', 1rem);
     }
   }
 }
 
-@media (min-width: 768px){
-  .cart-container{
-      padding: 2.75em 0 1.5em 1.5em;
-      .cart-summary-notice {
-      @include flex-layout(
-        $justify-content: center
-      );
+@media (min-width: $tablet-view) {
+  .cart-container {
+    padding: 0 0 1.5em 0;
+    .cart-summary-notice {
+      @include flex-layout($justify-content: center);
     }
   }
 }
