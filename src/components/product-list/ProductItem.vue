@@ -15,7 +15,7 @@ const props = defineProps({
   },
 })
 const getImageUrl = (path) => {
-  const cleanPath = path.replace('./', '../../')
+  const cleanPath = path.replace('./', '../../assets')
   return new URL(cleanPath, import.meta.url).href
 }
 const cartIcons = ref({
