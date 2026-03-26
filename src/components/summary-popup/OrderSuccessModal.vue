@@ -2,8 +2,8 @@
 import SuccessModalContent from './SuccessModalContent.vue'
 import { ref } from 'vue'
 import SuccessIcon from '../icons/icon-order-confirmed.svg'
-import { useCartStore } from '@/stores/cart'
-const cart = useCartStore()
+
+
 const iconData = ref({
   src: SuccessIcon,
   alt: 'Success icon modal at top',

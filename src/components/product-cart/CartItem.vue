@@ -8,8 +8,9 @@ const props = defineProps({
   inOrder: Boolean,
 })
 const getImageUrl = (path) => {
-  const cleanPath = path.replace('./', '../../')
-  return new URL(cleanPath, import.meta.url).href
+  const filename = path.split('/').pop();
+  const key = Object.keys(images).find(key => key.endsWith(filename));
+  return images[key]?.default || '';
 }
 const emit = defineEmits(['remove'])
 </script>
