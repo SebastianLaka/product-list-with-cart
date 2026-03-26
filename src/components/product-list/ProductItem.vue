@@ -14,9 +14,12 @@ const props = defineProps({
     required: true,
   },
 })
+const images = import.meta.glob('../../assets/images/*.jpg', { eager: true });
+
 const getImageUrl = (path) => {
-  const cleanPath = path.replace('./assets', '../../assets')
-  return new URL(cleanPath, import.meta.url).href
+  const filename = path.split('/').pop();
+  const key = Object.keys(images).find(key => key.endsWith(filename));
+  return images[key]?.default || '';
 }
 const cartIcons = ref({
   buttonIcons: [addCartIcon, DecrementQuantity, IncrementQuantity],
