@@ -45,17 +45,17 @@ const productInCart = computed(() => {
       >
         <template #cart-content>
           <img :src="cartIcons.buttonIcons[0]" alt="" class="cart-icon" />
-          <p class="cart-button__content">Add to Cart</p>
+          Add to Cart
         </template>
       </CartButton>
       <CartButton v-else class="cart-button activated-cart-button">
         <template #cart-content>
           <button class="remove-cart-item" @click="cart.decrementCartAmount(props.productData)">
-            <img :src="cartIcons.buttonIcons[1]" alt="" class="remove-cart-icon" />
+            <img :src="cartIcons.buttonIcons[1]" alt="icon with remve item to cart when click at button" class="remove-cart-icon" />
           </button>
           <p class="activated-cart-button__content">{{ productInCart.quantity }}</p>
           <button class="add-cart-item" @click="cart.updateCartAmount(props.productData)">
-            <img :src="cartIcons.buttonIcons[2]" alt="" class="add-cart-icon" />
+            <img :src="cartIcons.buttonIcons[2]" alt="icon which allow add item to cart when click at button" class="add-cart-icon" />
           </button>
         </template>
       </CartButton>
@@ -88,7 +88,6 @@ const productInCart = computed(() => {
         margin: 0 auto;
         padding: 0.5em 1em;
         border-radius: 4em;
-        border: none;
         border: 0.1em solid getColor('Rose-900');
         .cart-icon {
           width: 2em;
@@ -104,17 +103,18 @@ const productInCart = computed(() => {
         }
         .add-cart-item,
         .remove-cart-item {
-          margin: 0 1px;
+          margin: 0 .1em;
           @include flex-layout($justify-content: center, $align-items: center);
           border-radius: 50%;
-          border: none;
+          border: transparent;
           outline: 0.1em solid getColor('Rose-50');
           padding: 0;
           background-color: transparent;
           height: 1.25em;
           width: 1.25em;
           transition: all 0.3s ease;
-          img {
+          .remove-cart-icon,
+          .add-cart-icon {
             width: 0.75em;
             height: auto;
             filter: brightness(0) invert(1);
