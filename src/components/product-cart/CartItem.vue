@@ -7,6 +7,7 @@ const props = defineProps({
   closeIcon: String,
   inOrder: Boolean,
 })
+const images = import.meta.glob('../../assets/images/*.jpg', { eager: true });
 const getImageUrl = (path) => {
   const filename = path.split('/').pop();
   const key = Object.keys(images).find(key => key.endsWith(filename));
