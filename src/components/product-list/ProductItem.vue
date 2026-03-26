@@ -4,6 +4,7 @@ import CartButton from './CartButton.vue'
 import addCartIcon from '../icons/icon-add-to-cart.svg'
 import IncrementQuantity from '../icons/icon-increment-quantity.svg'
 import DecrementQuantity from '../icons/icon-decrement-quantity.svg'
+
 import { useCartStore } from '@/stores/cart'
 const cart = useCartStore()
 const props = defineProps({

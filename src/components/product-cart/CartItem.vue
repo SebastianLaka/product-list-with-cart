@@ -21,7 +21,7 @@ const emit = defineEmits(['remove'])
         :src="getImageUrl(item.image.mobile)"
         alt="Dessert in summary modal when you completed your order."
         v-if="inOrder"
-        class="test__image"
+        class="cart-desserts-container__image"
       />
       <div class="cart-item-details cart-item-section">
         <h2 class="cart-item-details__product-name">{{ item.name }}</h2>
