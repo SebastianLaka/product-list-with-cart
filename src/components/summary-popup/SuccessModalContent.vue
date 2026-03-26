@@ -6,38 +6,39 @@ import { useCartStore } from '@/stores/cart'
 const cart = useCartStore()
 </script>
 <template>
-  <div class="success-modal-content">
-    <slot name="order-confirm" />
-    <div class="modal-cart-items">
-      <CartItem
-        v-for="cartItem in cart.cartItems"
-        :key="cartItem.name"
-        :item="cartItem"
-        :price="cartItem.price"
-        :in-order="true"
-      />
-    </div>
-    <CartSummary>
-      <div class="cart-summary-total">
-        <p class="cart-summary-total__content">Order Total</p>
-        <p class="cart-summary-total__price">${{ cart.sumUpCart.toFixed(2) }}</p>
+    <div class="success-modal-content" v-if="cart.isVisible">
+      <slot name="order-confirm" />
+      <div class="modal-cart-items">
+        <CartItem
+          v-for="cartItem in cart.cartItems"
+          :key="cartItem.name"
+          :item="cartItem"
+          :price="cartItem.price"
+          :in-order="true"
+        />
       </div>
-    </CartSummary>
-    <div class="modal-actions">
-      <CartButton class="cart-button" @click="cart.resetCart">
-        <template #cart-content>Start New Order</template>
-      </CartButton>
-      <CartButton class="cart-button" @click="cart.hideModal">
-        <template #cart-content>Back To Cart</template>
-      </CartButton>
+      <CartSummary>
+        <div class="cart-summary-total">
+          <p class="cart-summary-total__content">Order Total</p>
+          <p class="cart-summary-total__price">${{ cart.sumUpCart.toFixed(2) }}</p>
+        </div>
+      </CartSummary>
+      <div class="modal-actions">
+        <CartButton class="cart-button" @click="cart.resetCart">
+          <template #cart-content>Start New Order</template>
+        </CartButton>
+        <CartButton class="cart-button" @click="cart.hideModal">
+          <template #cart-content>Back To Cart</template>
+        </CartButton>
+      </div>
     </div>
-  </div>
 </template>
 <style lang="scss" scoped>
 @use '../../assets/sass/colors.scss' as *;
 @use '../../assets/sass/fonts.scss' as *;
 @use '../../assets/sass/mixins.scss' as *;
 @use '../../assets/sass/breakpoints.scss' as *;
+
 .success-modal-content {
   @include flex-layout($flex-direction: column, $justify-content: center);
   background-color: getColor('Rose-50');
@@ -47,20 +48,20 @@ const cart = useCartStore()
   @include set-gap($row-gap: 2em);
   .cart-summary-total {
     @include flex-layout($justify-content: space-between);
-    &__content{
+    &__content {
       @include set-element-typography('Rose-900', 'font-400', 1rem);
     }
     &__price {
       @include set-element-typography('Rose-900', 'font-700', 1.75rem);
     }
   }
-  .modal-actions{
+  .modal-actions {
     @include flex-layout($flex-direction: column);
-    @include set-gap($row-gap: .75em);
+    @include set-gap($row-gap: 0.75em);
   }
   .modal-cart-items {
     @include flex-layout($flex-direction: column, $align-items: start);
-    @include set-gap($row-gap: 0.5em);
+    @include set-gap($row-gap: 1em);
     overflow-y: auto;
   }
 }

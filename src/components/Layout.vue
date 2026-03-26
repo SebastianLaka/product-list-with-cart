@@ -13,7 +13,9 @@ const cart = useCartStore()
     </ProductsHeader>
     <ProductList />
     <ProductCartMain />
-    <SummaryPopup v-if="cart.isClicked" />
+    <Transition name="show-modal">
+      <SummaryPopup v-if="cart.isClicked" />
+    </Transition>
   </main>
 </template>
 <style lang="scss" scoped>
@@ -24,7 +26,17 @@ const cart = useCartStore()
 @media (min-width: $mobile-view) {
   .main-layout {
     min-height: 100svh;
-    padding: 0 .25em;
+    padding: 0 0.25em;
+    .show-modal-enter-active,
+    .show-modal-leave-active {
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+    }
+    .show-modal-enter-from,
+    .show-modal-leave-to {
+      opacity: 0;
+    }
     .product-header {
       padding: 2em 0;
       &__category {
@@ -33,7 +45,7 @@ const cart = useCartStore()
     }
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: $desktop-wide) {
   .main-layout {
     @include grid-layout($columns: 3);
     @include set-gap($row-gap: 1em);

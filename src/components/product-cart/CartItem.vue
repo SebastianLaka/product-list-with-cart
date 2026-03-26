@@ -5,9 +5,8 @@ const props = defineProps({
     required: true,
   },
   closeIcon: String,
-  inOrder: Boolean
+  inOrder: Boolean,
 })
-console.log(props);
 const getImageUrl = (path) => {
   const cleanPath = path.replace('./', '../../')
   return new URL(cleanPath, import.meta.url).href
@@ -17,17 +16,27 @@ const emit = defineEmits(['remove'])
 
 <template>
   <div class="cart-desserts">
-    <img :src="getImageUrl(item.image.mobile)" alt="Dessert in summary modal when you completed your order." v-if="inOrder" class="cart-desserts__image">
-    <div class="cart-item-details cart-item-section">
-      <h2 class="cart-item-details__product-name">{{ item.name }}</h2>
-      <div class="cart-item-pricing">
-        <p class="cart-item-pricing__amount">{{ item.quantity }}x</p>
-        <p class="cart-item-pricing__price">@${{ item.price.toFixed(2) }}</p>
-        <p class="cart-item-pricing__amount-price">
-          ${{ (item.price * item.quantity).toFixed(2) }}
-        </p>
+    <div class="cart-desserts-container">
+      <img
+        :src="getImageUrl(item.image.mobile)"
+        alt="Dessert in summary modal when you completed your order."
+        v-if="inOrder"
+        class="test__image"
+      />
+      <div class="cart-item-details cart-item-section">
+        <h2 class="cart-item-details__product-name">{{ item.name }}</h2>
+        <div class="cart-item-pricing">
+          <p class="cart-item-pricing__amount">{{ item.quantity }}x</p>
+          <p class="cart-item-pricing__price">@${{ item.price.toFixed(2) }}</p>
+          <p class="cart-item-pricing__amount-price" v-if="!inOrder">
+            ${{ (item.price * item.quantity).toFixed(2) }}
+          </p>
+        </div>
       </div>
     </div>
+    <p class="cart-desserts__modal-price" v-if="inOrder">
+      ${{ (item.price * item.quantity).toFixed(2) }}
+    </p>
     <button class="remove-cart-item" @click="emit('remove')" v-if="!inOrder">
       <img :src="closeIcon" alt="Remove item" class="remove-cart-item__icon" />
     </button>
@@ -43,9 +52,15 @@ const emit = defineEmits(['remove'])
   .cart-desserts {
     @include flex-layout($justify-content: space-between, $align-items: center);
     @include set-gap($column-gap: 1em);
-    &__image{
-      width:  4.688em;
-      height: 4.688em;
+    padding: 0 1em;
+    width: 100%;
+    .cart-desserts-container{
+      @include flex-layout();
+      @include set-gap($column-gap: 1em);
+      &__image {
+        width: 4.688em;
+        height: 4.688em;
+      }
     }
     .cart-item-section {
       @include flex-layout($flex-direction: column);
@@ -55,7 +70,7 @@ const emit = defineEmits(['remove'])
       }
       .cart-item-pricing {
         @include flex-layout();
-        gap: 0 0.5em;
+        @include set-gap($row-gap: 0em, $column-gap: 0.5em);
         &__amount {
           padding-right: 0.75em;
           @include set-element-typography('Red', 'font-600', 1rem);
@@ -69,6 +84,9 @@ const emit = defineEmits(['remove'])
         }
       }
     }
+    &__modal-price {
+      font-weight: changeWeight('font-600');
+    }
     .remove-cart-item {
       @include flex-layout($justify-content: center, $align-items: center);
       border-radius: 50%;
@@ -76,7 +94,6 @@ const emit = defineEmits(['remove'])
       padding: 0.5em;
       height: 1.25rem;
       width: 1.25rem;
-      cursor: pointer;
       &__icon {
         transform: translate(-0.01em, -0.02em);
         width: 0.625em;

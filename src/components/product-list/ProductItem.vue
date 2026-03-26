@@ -10,22 +10,20 @@ const props = defineProps({
   image: Object,
   productData: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
-
 const getImageUrl = (path) => {
   const cleanPath = path.replace('./', '../../')
   return new URL(cleanPath, import.meta.url).href
 }
-
 const cartIcons = ref({
   buttonIcons: [addCartIcon, DecrementQuantity, IncrementQuantity],
 })
-
 const productInCart = computed(() => {
-  return cart.cartItems.find(item => item.name === props.productData.name)
+  return cart.cartItems.find((item) => item.name === props.productData.name)
 })
+
 </script>
 
 <template>
@@ -34,12 +32,12 @@ const productInCart = computed(() => {
       <picture>
         <source :srcset="getImageUrl(image.desktop)" media="(min-width: 992px)" />
         <source :srcset="getImageUrl(image.tablet)" media="(min-width: 768px)" />
-        <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop"/>
+        <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop" :class="{ 'product-image--active': productInCart }"/>
       </picture>
       <CartButton
         class="cart-button"
         v-if="!productInCart"
-       @click="cart.updateCartAmount(props.productData)"
+        @click="cart.updateCartAmount(props.productData)"
       >
         <template #cart-content>
           <img :src="cartIcons.buttonIcons[0]" alt="" class="cart-icon" />
@@ -71,8 +69,11 @@ const productInCart = computed(() => {
   .products-box {
     .product-image-area {
       @include position-element($position: relative);
-      .product-image{
+      .product-image {
         border-radius: 1em;
+        &--active {
+          border: .2em solid getColor('Red'); 
+        }
       }
       .cart-button {
         @include flex-layout($justify-content: center, $align-items: center);
@@ -110,7 +111,7 @@ const productInCart = computed(() => {
           width: 1.25em;
           transition: all 0.3s ease;
           img {
-            width: .75em;
+            width: 0.75em;
             height: auto;
             filter: brightness(0) invert(1);
           }
@@ -129,7 +130,6 @@ const productInCart = computed(() => {
 }
 @media (min-width: $desktop-small) {
   .products-box {
-
     .product-image-area {
       .cart-button {
         padding: 0.5em 0.5em;
@@ -145,7 +145,7 @@ const productInCart = computed(() => {
       .activated-cart-button {
         .add-cart-item,
         .remove-cart-item {
-          margin: 0 .4em;
+          margin: 0 0.4em;
         }
       }
     }

@@ -1,31 +1,28 @@
 <script setup>
-import ProductsHeader from './ProductsHeader.vue'
 import ProductItem from './ProductItem.vue'
 import { useProductsStore } from '@/stores/products'
 const storeProductData = useProductsStore()
 </script>
 
 <template>
-  <section class="products-container">
-
-    <ProductItem
-      v-for="product in storeProductData.productDataCopy"
-      :key="product.name"
-      :image="product.image"
-      :product-data="product"
-      :class="`article-item-${product.category}`"
-    >
-      <template #product-info>
-        <div class="product-info">
-          <p class="product-info__category">{{ product.category }}</p>
-          <h2 class="product-info__name">{{ product.name }}</h2>
-          <p class="product-info__price">${{ product.price.toFixed(2) }}</p>
-        </div>
-      </template>
-    </ProductItem>
+  <section class="products-container" >
+      <ProductItem
+        v-for="product in storeProductData.productDataCopy"
+        :key="product.name"
+        :image="product.image"
+        :product-data="product"
+        :class="`article-item-${product.category}`"
+      >
+        <template #product-info>
+          <div class="product-info">
+            <p class="product-info__category">{{ product.category }}</p>
+            <h2 class="product-info__name">{{ product.name }}</h2>
+            <p class="product-info__price">${{ product.price.toFixed(2) }}</p>
+          </div>
+        </template>
+      </ProductItem>
   </section>
 </template>
-
 <style lang="scss" scoped>
 @use '../../assets/sass/breakpoints.scss' as *;
 @use '../../assets/sass/fonts.scss' as *;
@@ -70,7 +67,7 @@ const storeProductData = useProductsStore()
 }
 @media (min-width: $desktop-wide) {
   .products-container {
-    @include grid-child(1,3)
+    @include grid-child(1, 3);
   }
 }
 </style>
