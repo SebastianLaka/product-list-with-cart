@@ -30,9 +30,9 @@ const productInCart = computed(() => {
   <div class="products-box">
     <div class="product-image-area">
       <picture>
-        <source :srcset="getImageUrl(image.desktop)" media="(min-width: 992px)" />
-        <source :srcset="getImageUrl(image.tablet)" media="(min-width: 768px)" />
-        <img :src="getImageUrl(image.mobile)" class="product-image" :alt="image.desktop" :class="{ 'product-image--active': productInCart }"/>
+        <source :srcset="getImageUrl(props.image.desktop)" media="(min-width: 992px)" />
+        <source :srcset="getImageUrl(props.image.tablet)" media="(min-width: 768px)" />
+        <img :src="getImageUrl(props.image.mobile)" class="product-image" :alt="image.desktop" :class="{ 'product-image--active': productInCart }"/>
       </picture>
       <CartButton
         class="cart-button"
